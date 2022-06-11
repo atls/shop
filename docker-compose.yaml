@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  yarn:
+    image: node:16
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+    entrypoint: yarn
+
+  db:
+    image: bitnami/postgresql
+    environment:
+      - POSTGRESQL_PASSWORD=password
+      - POSTGRESQL_DATABASE=db
+    ports:
+      - 5432:5432
+    volumes:
+      - strapi-data:/var/lib/postgresql/data/
